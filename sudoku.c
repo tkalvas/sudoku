@@ -257,9 +257,7 @@ void adjust_mask(int i, int j, int mask, struct save *save) {
     int old_mask = cells[x].mask;
     int new_mask = old_mask & mask;
     if (old_mask != new_mask) {
-      //int old_count = cells[x].count;
       cells[x].count--;
-      //printf("adjust mask %d,%d=%d %d>%d %d>%d\n", i, j, x, old_mask, new_mask, old_count, cells[x].count);
       loop_disconnect(x);
       loop_insert(cells[x].count, x);
       cells[x].mask = new_mask;
@@ -402,8 +400,6 @@ void input(void) {
   }
 }
 
-// incorrect solution in 5-1.sud
-
 int main(int argc, char *argv[]) {
   struct timespec start, stop;
   clock_gettime(CLOCK_MONOTONIC_RAW, &start);
@@ -415,7 +411,6 @@ int main(int argc, char *argv[]) {
     printf("no solution\n");
   }
   clock_gettime(CLOCK_MONOTONIC_RAW, &stop);
-  //print_mask();
   print_solution();
   stop.tv_sec -= start.tv_sec;
   if (stop.tv_nsec < start.tv_nsec) {
